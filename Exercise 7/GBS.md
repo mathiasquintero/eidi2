@@ -4,7 +4,11 @@
 
 ## Aufgabe 10.3 - Speicheralloziierung
 
+Wir schreiben alle Freie Speicherplätze Tablerarisch auf. Jedes Zeitpunkt ist nach dem man eine Menge Speicher Alloziieren wollte. Falls ein Speicherplatzt komplett gefüllt wurde, wird der nicht mehr mitgeschrieben.
+
 ### a) First Fit
+
+Wir gehen alle Plätze durch, bis wir einen finden, wo es passt.
 
 | Zeitpunkt n| | | | | |
 | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- |
@@ -18,6 +22,8 @@
 
 ### b) Next Fit
 
+Wir gehen alle Plätze seit dem Lezten zugriff durch, bis wir einen finden, wo es passt. Das heißt, wir fangen nicht immer mit den ersten.
+
 | Zeitpunkt n||||||
 | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- |
 | 0 |100 kB|400 kB|250 kB|200 kB|50 kB|
@@ -30,6 +36,8 @@
 
 ### c) Best Fit
 
+Wir gehen alle Plätze durch und suchen den kleinsten wo es passt.
+
 | Zeitpunkt n||||||
 | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- |
 | 0 |100 kB|400 kB|250 kB|200 kB|50 kB|
@@ -41,6 +49,8 @@
 | 6 |30 kB|150 kB|150 kB|80 kB|
 
 ### d) Worst Fit
+
+Wir gehen alle Plätze durch und suchen den Größten.
 
 | Zeitpunkt n||||||
 | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- |
