@@ -1,8 +1,7 @@
-Grundlagen Betriebssysteme und System Software
+**Grundlagen Betriebssysteme und System Software**
 ===
-
 ### Mathias Quintero, Markus Sellmaier
----
+
 ## Aufgabe 10.3 - Speicheralloziierung
 
 ### a) First Fit
@@ -55,9 +54,5 @@ Grundlagen Betriebssysteme und System Software
 ### **!!! Fault !!!**
 
 Es gab keinen Platz für die 250 kB.
-
-|||||||
-| :------------- | :------------- | :------------- | :------------- | :------------- | :------------- |
-| 6 |100 kB|190 kB|130 kB|200 kB|50 kB|
 
 ## Aufgabe 10.4 - Paging
