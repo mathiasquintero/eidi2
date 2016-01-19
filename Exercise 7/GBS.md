@@ -203,7 +203,7 @@ Fehler: 12
 
 #### 1. FIFO
 
-| Zeitpunkt| w |  f~1~ | f~2~ | f~3~ | f~4~ | f~4~ | Swap | Fault |
+| Zeitpunkt| w |  f~1~ | f~2~ | f~3~ | f~4~ | f~5~ | Swap | Fault |
 | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- |  :------------- | :------------- |
 | 0 | | | | | | | 1,2,3,4,5,0 | <li>[ ]</li> |
 | 1 | 1 | **1** | | | | | 2,3,4,5,0 | <li>[x]</li> |
@@ -235,7 +235,7 @@ Fehler: 9
 
 #### 2. LIFO
 
-| Zeitpunkt| w |  f~1~ | f~2~ | f~3~ | f~4~ | f~4~ | Swap | Fault |
+| Zeitpunkt| w |  f~1~ | f~2~ | f~3~ | f~4~ | f~5~ | Swap | Fault |
 | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- |  :------------- | :------------- |
 | 0 | | | | | | | 1,2,3,4,5,0 | <li>[ ]</li> |
 | 1 | 1 | **1** | | | | | 2,3,4,5,0 | <li>[x]</li> |
@@ -267,7 +267,7 @@ Fehler: 7
 
 #### 3. LRU
 
-| Zeitpunkt| w |  f~1~ | f~2~ | f~3~ | f~4~ | f~4~ | Swap | Fault |
+| Zeitpunkt| w |  f~1~ | f~2~ | f~3~ | f~4~ | f~5~ | Swap | Fault |
 | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- |  :------------- | :------------- |
 | 0 | | | | | | | 1,2,3,4,5,0 | <li>[ ]</li> |
 | 1 | 1 | **1** | | | | | 2,3,4,5,0 | <li>[x]</li> |
@@ -299,7 +299,7 @@ Fehler: 7
 
 #### 4. LFU
 
-| Zeitpunkt| w |  f~1~ | f~2~ | f~3~ | f~4~ | f~4~ | Swap | Fault |
+| Zeitpunkt| w |  f~1~ | f~2~ | f~3~ | f~4~ | f~5~ | Swap | Fault |
 | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- | :------------- |  :------------- | :------------- |
 | 0 | | | | | | | 1,2,3,4,5,0 | <li>[ ]</li> |
 | 1 | 1 | **1**/1 | | | | | 2,3,4,5,0 | <li>[x]</li> |
@@ -330,4 +330,9 @@ Fehler: 7
 Fehler: 9
 
 ### 4.3
-Es ist erwünscht, dass man so wenig wie möglich Seiten wechselt .
+
+Es ist erwünscht, dass man so wenig wie möglich Seiten wechselt.
+Allgemein sollte mit unseren Algorithmus gelten:
+
+* Je mehr Kacheln desto weniger Fehler
+* Die Anzahl an Fehler soll eine vernünftige Obergrenze bei w besitzen. Diese Grenze könnte zum Beispiel die hälfte der Operationen sein. Also 12.5 auf 13 gerundet. Wobei Least Recently Used bei 4 Kacheln diese Grenze uberschreitet. Das liegt daran, dass Seiten mehrmals schnell wieder aufgegriffen werden.
