@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{bussproofs}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ right=20mm,
+ top=20mm,
+ }
+
+\title{Introduction to Informatics 2}
+\author{Mathias Quintero}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 13.2.}
+
+We start with the statement.
+
+\begin{equation}
+  let\: rec\: f\: =\: fun\: a\: ->\: match\: a\: with\: (z,[])\: ->\: []\: |\: (z,x::xs)\: ->\: (z+x)::(f\: (z,xs))
+\end{equation}
+
+For simplicity we define:
+
+\begin{equation}
+  \Pi = match\: a\: with\: (z,[])\: ->\: []\: |\: (z,x::xs)\: ->\: (z+x)::(f\: (z,xs))
+\end{equation}
+
+And have to now prove that f will terminate for every possible list l in (7,l).
+
+This will be done by induction by n. With n being the length of the list l.
+
+Our first step would be to prove it works for the empty list:
+
+\begin{equation}
+  $$
+  \begin{prooftree}
+      \AxiomC{$\Pi \: \Rightarrow \: match\: a\: with\: (z,[])\: ->\: []\: |\: (z,x::xs)\: ->\: (z+x)::(f\: (z,xs))$}
+      \UnaryInfC{$\Pi [$(7,[\:])/a$]\: \Rightarrow \: [\:]$}
+      \UnaryInfC{$ f \: (7,[\:]) \quad terminates$}
+  \end{prooftree}
+  $$
+\end{equation}
+
+Now we continue with the inductive Step. For this we will assume that it works for a list ${L}_{n}$ of the length of n.
+
+Meaning:
+
+\begin{equation}
+    {L}_{n} \: \Rightarrow \: [{v}_{1};...;{v}_{n}]
+\end{equation}
+
+And:
+
+\begin{equation}
+    \Pi [(7,{L}_{n})/a] \: \Rightarrow \: [{r}_{1};...;{r}_{n}]
+\end{equation}
+
+So now we prove it for a List ${L}_{n+1}$ of length n+1.
+
+\begin{equation}
+  $$
+  \begin{prooftree}
+      \AxiomC{${L}_{n+1} \: \Rightarrow \: {v}_{0}::{L}_{n}$}
+      \AxiomC{$\Pi$}
+      \BinaryInfC{$\Pi [$(7,{L}_{n+1})/a$]\: \Rightarrow \: (7+{v}_{0})::(f (7,{L}_{n}))$}
+      \UnaryInfC{$\Pi [$(7,{L}_{n+1})/a$]\: \Rightarrow \: (7+{v}_{0})::[{r}_{1};...;{r}_{n}]$}
+      \AxiomC{$7+{v}_{0} \: \Rightarrow \: {r}_{0}$}
+      \BinaryInfC{$\Pi [$(7,{L}_{n+1})/a$]\: \Rightarrow \: [{r}_{0};{r}_{1};...;{r}_{n}]$}
+      \UnaryInfC{$ f \: (7,{L}_{n+1}) \quad terminates$}
+  \end{prooftree}
+  $$
+\end{equation}
+
+$$
+\square
+$$
+
+\end{document}

@@ -1,0 +1,183 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{bussproofs}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ right=20mm,
+ top=20mm,
+ }
+
+\title{Introduction to Informatics 2}
+\author{Mathias Quintero}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 12.1.}
+
+\subsection{12.1.1}
+\label{sub:12.1.1}
+
+We start with the statement.
+
+\begin{equation}
+  e = []
+\end{equation}
+
+We can infer as an absolute truth that [ ] terminates. Meaning:
+
+\begin{equation}
+  $$
+  \begin{prooftree}
+      \AxiomC{$true$}
+      \UnaryInfC{$ [ \: ] \quad terminates$}
+  \end{prooftree}
+  $$
+\end{equation}
+
+Therefore:
+
+\begin{equation}
+  $$
+  \begin{prooftree}
+      \AxiomC{$e = [ \: ]$}
+      \UnaryInfC{$ e \quad terminates$}
+  \end{prooftree}
+  $$
+\end{equation}
+
+We define:
+
+\begin{equation}
+  let \: {e}_{match} \:  e = \: match\: e\: with \: [ \: ] \: ->\: {e}_{1} \: | \: x::xs \: ->\: {e}_{2}
+\end{equation}
+
+Meaning:
+
+\begin{equation}
+  { \Pi  }_{ e } =
+  $$
+  \begin{prooftree}
+      \AxiomC{$ let \: {e}_{match} \:  e = \: match\: e\: with \: [ \: ] \: ->\: {e}_{1} \: | \: x::xs \: ->\: {e}_{2} $}
+      \UnaryInfC{$ {e}_{match} \:  e \: \Rightarrow match\: e\: with \: [ \: ] \: ->\: {e}_{1} \: | \: x::xs \: ->\: {e}_{2}$}
+  \end{prooftree}
+  $$
+\end{equation}
+
+And prove:
+
+\begin{equation}
+  $$
+  \begin{prooftree}
+      \AxiomC{$e = [ \: ]$}
+      \AxiomC{${ \Pi  }_{ e }$}
+      \BinaryInfC{$ {e}_{match} \:  e \: \Rightarrow \: {e}_{1}$}
+      \UnaryInfC{$ match\: e\: with \: [ \: ] \: ->\: {e}_{1} \: | \: x::xs \: ->\: {e}_{2} \Rightarrow  \: {e}_{1}$}
+  \end{prooftree}
+  $$
+\end{equation}
+
+Since ${e}_{match}$ returns ${e}_{1}$ directly when handed e as a parameter we know that the equality is absolute.
+
+\subsection{12.1.2}
+\label{sub:12.1.2}
+
+We start with the assumption that e terminates.
+
+Meaning that anything that equals e will also terminate:
+
+\begin{equation}
+  { \Pi  }_{ t } =
+  $$
+  \begin{prooftree}
+      \AxiomC{$e \quad terminates$}
+      \AxiomC{$ e = e'::e''$}
+      \BinaryInfC{$ e'::e'' \quad terminates $}
+  \end{prooftree}
+  $$
+\end{equation}
+
+Therefore we can actually use the value for e infer a match, using the information from 12.1.1.
+
+This means that $ {e}_{match} \:  e$ terminates when the matched expression terminates and therefore equality is present.
+
+Since the Pattern Matching names our head and tail x and xs we have to change those in ${e}_{2}$
+
+\begin{equation}
+  $$
+  \begin{prooftree}
+      \AxiomC{${ \Pi  }_{ e }$}
+      \AxiomC{${ \Pi  }_{ t }$}
+      \BinaryInfC{$ {e}_{match} \:  e \: \Rightarrow \: {e}_{2}[e'/x,e''/xs] $}
+      \UnaryInfC{$ match\: e\: with \: [ \: ] \: ->\: {e}_{1} \: | \: x::xs \: ->\: {e}_{2} \Rightarrow  \: {e}_{2}[e'/x,e''/xs]$}
+  \end{prooftree}
+  $$
+\end{equation}
+
+\subsection{12.1.3}
+\label{sub:12.1.3}
+
+For this one we define:
+
+\begin{equation}
+  let \: {f}_{1} =\: fun\: x \: -> \: match\: x\: with \: [ \: ] \: ->\: 1 \: | \: x::xs \: ->\: 42
+\end{equation}
+
+and:
+
+\begin{equation}
+  let \: {f}_{2} =\:fun \: x \: ->\: 42
+\end{equation}
+
+We therefore can assume:
+
+\begin{equation}
+  { \Pi  }_{ {f}_{1} } =
+  $$
+  \begin{prooftree}
+      \AxiomC{$let \: {f}_{1} =\: fun\: x \: -> \: match\: x\: with \: [ \: ] \: ->\: 1 \: | \: x::xs \: ->\: 42$}
+      \UnaryInfC{${f}_{1} \: x \: \Rightarrow \: match\: x\: with \: [ \: ] \: ->\: 1 \: | \: x::xs \: ->\: 42$}
+      \AxiomC{$ x \: \Rightarrow h::t$}
+      \BinaryInfC{${f}_{1} \: x \: \Rightarrow 42$}
+      \AxiomC{$[1;2;3] \: \Rightarrow \: 1::[2;3]$}
+      \BinaryInfC{${f}_{1} \: [1;2;3] \: \Rightarrow 42$}
+  \end{prooftree}
+  $$
+\end{equation}
+
+Since [1;2;3] is a constant value and therefore always terminates.
+
+In a similar fashion we can also determine a value for ${f}_{2}$ 5:
+
+\begin{equation}
+  { \Pi  }_{ {f}_{2} } =
+  $$
+  \begin{prooftree}
+      \AxiomC{$let \: {f}_{2} =\: fun\: x \: -> \: match\: x\: with \: [ \: ] \: ->\: 1 \: | \: x::xs \: ->\: 42$}
+      \UnaryInfC{${f}_{2} \: x \: \Rightarrow \: 42$}
+      \AxiomC{$5 \: \Rightarrow \: 5$}
+      \BinaryInfC{${f}_{2} \: 5 \: \Rightarrow 42$}
+  \end{prooftree}
+  $$
+\end{equation}
+
+And we can as a result determine:
+
+\begin{equation}
+  $$
+  \begin{prooftree}
+      \AxiomC{${ \Pi  }_{ {f}_{1} }$}
+      \AxiomC{${ \Pi  }_{ {f}_{2} }$}
+      \AxiomC{$42 \quad terminates$}
+      \TrinaryInfC{${f}_{1} \: [1;2;3] = {f}_{2} \: 5$}
+  \end{prooftree}
+  $$
+\end{equation}
+
+\end{document}
